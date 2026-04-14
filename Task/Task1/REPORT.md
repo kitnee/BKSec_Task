@@ -160,9 +160,9 @@ drwxr-x---   2 root      adm               4096 May 27  2025 unattended-upgrades
 
 - With RCE confirmed, I traced the attacker's post-exploitation activities. It was clear he had successfully planted a `web shell` in `/status.php`, executing system commands through the `?a=` parameter. Moreover, he also operated under an `User-Agent` string named `evil_nextcry`:
 
-1. **Reconnaissance:** The attacker started by exploring the file system by executing `/bin/ls` and `/bin/find /nextcloud/` to list the directory structure and locate the valuable data
-2. **Data exfiltration:** After locating the data, the attacker immediately exfiltrated them. He used `/bin/cat` to read and dump several `.xml` files: `clients_bank_data_1_.xml`, `clients_bank_data_2_.xml`, and `clients_bank_data.xml`. 
-3. **Encrypting & Ransomware:** The attacker then used `openssl` to encrypt employee spreadsheets which were     `Employee_contact_list.xlsx` and `Employee_Salary_List.xlsx` into `.cry` files using AES-256 encryption before converting to `base64` format. After that, he followed up with `/bin/rm -f` commands to delete the original files.
+  1. **Reconnaissance:** The attacker started by exploring the file system by executing `/bin/ls` and `/bin/find /nextcloud/` to list the directory structure and locate the valuable data
+  2. **Data exfiltration:** After locating the data, the attacker immediately exfiltrated them. He used `/bin/cat` to read and dump several `.xml` files: `clients_bank_data_1_.xml`, `clients_bank_data_2_.xml`, and `clients_bank_data.xml`. 
+  3. **Encrypting & Ransomware:** The attacker then used `openssl` to encrypt employee spreadsheets which were `Employee_contact_list.xlsx` and `Employee_Salary_List.xlsx` into `.cry` files using AES-256 encryption before converting to `base64` format. After that, he followed up with `/bin/rm -f` commands to delete the original files.
 
 - However, since the attacker executed the openssl command through an `HTTP GET request` to their shell, the encryption key was written in plaintext in the log.
 
