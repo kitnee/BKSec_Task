@@ -168,6 +168,12 @@ drwxr-x---   2 root      adm               4096 May 27  2025 unattended-upgrades
 
 - There was a parameter looked like this `--pass pass:d0nt_cry_n3xt`, which helped me to extract the password: `d0nt_cry_n3xt`. With this key, we can easily reverse the encryption recover the deleted files.
 
+- To do this, we can use the exact encrypt process of the attcker with the `-d` parameter which stands for decrypt:
+```bash
+openssl enc -d -aes256 -base64 --pass pass:d0nt_cry_n3xt -in /nextcloud/philip/files/employee/Employee_Salary_List.xlsx.cry -out Employee_Salary_List.xlsx
+openssl enc -d -aes256 -base64 --pass pass:d0nt_cry_n3xt -in /nextcloud/philip/files/employee/Employee_contact_list.xlsx.cry -out Employee_contact_list.xlsx
+```
+
 - After this point, I tried to recover the encrypted files, however I saw that these files were already recovered by someone:
 
 ![](pic14.png)
